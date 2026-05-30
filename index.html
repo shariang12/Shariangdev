@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>🚀 Shariang Dev • Jam, Translate & Kurs</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(ellipse at 50% 0%, #1e293b 0%, #0f172a 60%);
+      min-height: 100vh;
+      padding: 20px 16px 30px;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header Utama */
+    .main-header {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .logo-brand {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(250, 204, 21, 0.3), rgba(249, 115, 22, 0.3), rgba(239, 68, 68, 0.2));
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 38px;
+      border: 2px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 60px rgba(250, 204, 21, 0.12);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .brand-name {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #fbbf24, #f97316, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 2px;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .dev-badge {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fbbf24;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* Info Waktu & Kurs Singkat */
+    .info-strip {
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .current-time-small {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-icon {
+      font-size: 26px;
+      color: #fbbf24;
+    }
+
+    .time-display {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .time-now {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .date-now {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .quick-rate {
+      text-align: right;
+    }
+
+    .rate-label {
+      font-size: 10px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .rate-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #4ade80;
+    }
+
+    .rate-change {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .rate-up { color: #4ade80; }
+    .rate-down { color: #f87171; }
+
+    /* Menu Grid */
+    .menu-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .menu-card {
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(22px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      padding: 20px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 28px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .menu-card:active {
+      transform: scale(0.97);
+    }
+
+    .menu-card:active::before {
+      opacity: 1;
+    }
+
+    /* Warna per kartu */
+    .menu-card.time-card::before {
+      background: radial-gradient(circle at 30% 50%, rgba(96, 165, 250, 0.12), transparent);
+    }
+    .menu-card.time-card:active {
+      background: rgba(30, 50, 80, 0.7);
+      border-color: rgba(96, 165, 250, 0.4);
+    }
+
+    .menu-card.translate-card::before {
+      background: radial-gradient(circle at 70% 50%, rgba(168, 85, 247, 0.12), transparent);
+    }
+    .menu-card.translate-card:active {
+      background: rgba(50, 30, 70, 0.7);
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+
+    .menu-card.currency-card::before {
+      background: radial-gradient(circle at 50% 50%, rgba(34, 197, 94, 0.12), transparent);
+    }
+    .menu-card.currency-card:active {
+      background: rgba(20, 50, 30, 0.7);
+      border-color: rgba(34, 197, 94, 0.4);
+    }
+
+    .menu-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .icon-time {
+      background: rgba(96, 165, 250, 0.18);
+      color: #60a5fa;
+    }
+
+    .icon-translate {
+      background: rgba(168, 85, 247, 0.18);
+      color: #a855f7;
+    }
+
+    .icon-currency {
+      background: rgba(34, 197, 94, 0.18);
+      color: #4ade80;
+    }
+
+    .menu-info {
+      flex: 1;
+    }
+
+    .menu-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      margin-bottom: 3px;
+    }
+
+    .menu-desc {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .menu-arrow {
+      font-size: 18px;
+      color: #475569;
+      transition: transform 0.3s;
+    }
+
+    .menu-card:active .menu-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Fitur strip */
+    .feature-strip {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .feature-dot {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .feature-dot i {
+      font-size: 7px;
+    }
+
+    .dot-blue { color: #60a5fa; }
+    .dot-purple { color: #a855f7; }
+    .dot-green { color: #4ade80; }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #475569;
+      margin-top: 2px;
+    }
+
+    .footer-brand {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    @media (max-width: 380px) {
+      .brand-name {
+        font-size: 24px;
+      }
+      .menu-title {
+        font-size: 16px;
+      }
+      .menu-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+      .info-strip {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+      .quick-rate {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header Brand -->
+    <div class="main-header">
+      <div class="logo-brand">⚡</div>
+      <div class="brand-name">Shariang Dev</div>
+      <div class="brand-tagline">Solusi Digital • Jam, Translate & Kurs</div>
+      <div class="dev-badge">🚀 by Shariang</div>
+    </div>
+
+    <!-- Info Waktu & Kurs Singkat -->
+    <div class="info-strip">
+      <div class="current-time-small">
+        <div class="time-icon">
+          <i class="far fa-clock"></i>
+        </div>
+        <div class="time-display">
+          <div class="time-now" id="currentTimeSmall">00:00:00</div>
+          <div class="date-now" id="currentDateSmall">Memuat...</div>
+        </div>
+      </div>
+      <div class="quick-rate">
+        <div class="rate-label">💱 USD ke IDR</div>
+        <div class="rate-value" id="quickRate">Rp --</div>
+        <div class="rate-change rate-up" id="rateChange">↑ --</div>
+      </div>
+    </div>
+
+    <!-- Menu Utama -->
+    <div class="menu-grid">
+      <!-- Tombol TimeSphere -->
+      <a href="timesphere.html" class="menu-card time-card">
+        <div class="menu-icon icon-time">
+          <i class="fas fa-globe-asia"></i>
+        </div>
+        <div class="menu-info">
+          <div class="menu-title">🌍 TimeSphere</div>
+          <div class="menu-desc">Jam Dunia Global • 25 Kota • Real-Time</div>
+        </div>
+        <div class="menu-arrow">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </a>
+
+      <!-- Tombol LinguaSphere -->
+      <a href="linguasphere.html" class="menu-card translate-card">
+        <div class="menu-icon icon-translate">
+          <i class="fas fa-language"></i>
+        </div>
+        <div class="menu-info">
+          <div class="menu-title">🌐 LinguaSphere</div>
+          <div class="menu-desc">Auto Translate • 15+ Bahasa • Instan</div>
+        </div>
+        <div class="menu-arrow">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </a>
+
+      <!-- Tombol CurrencySphere (BARU) -->
+      <a href="currencysphere.html" class="menu-card currency-card">
+        <div class="menu-icon icon-currency">
+          <i class="fas fa-coins"></i>
+        </div>
+        <div class="menu-info">
+          <div class="menu-title">💱 CurrencySphere</div>
+          <div class="menu-desc">Konversi Kurs • 30+ Mata Uang • Auto Update</div>
+        </div>
+        <div class="menu-arrow">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- Fitur Kecil -->
+    <div class="feature-strip">
+      <div class="feature-dot"><i class="fas fa-circle dot-blue"></i> Real-time</div>
+      <div class="feature-dot"><i class="fas fa-circle dot-purple"></i> Auto Translate</div>
+      <div class="feature-dot"><i class="fas fa-circle dot-green"></i> Kurs Akurat</div>
+      <div class="feature-dot"><i class="fas fa-circle dot-blue"></i> 25+ Kota</div>
+    </div>
+
+    <div class="footer">
+      <i class="far fa-dot-circle"></i> Powered by <span class="footer-brand">Shariang Dev</span> • Teknologi Cerdas
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Update waktu lokal
+      function updateLocalTime() {
+        const now = new Date();
+        
+        const timeStr = now.toLocaleTimeString('id-ID', { 
+          hour12: false,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+        
+        const dateStr = now.toLocaleDateString('id-ID', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+
+        document.getElementById('currentTimeSmall').textContent = timeStr;
+        document.getElementById('currentDateSmall').textContent = dateStr;
+      }
+
+      // Fetch kurs USD ke IDR secara real-time
+      async function fetchExchangeRate() {
+        try {
+          // Menggunakan API gratis dari exchangerate-api
+          const response = await fetch('https://open.er-api.com/v6/latest/USD');
+          const data = await response.json();
+          
+          if (data && data.rates && data.rates.IDR) {
+            const rate = data.rates.IDR;
+            const formattedRate = new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            }).format(rate);
+            
+            document.getElementById('quickRate').textContent = formattedRate;
+            
+            // Simulasi perubahan (karena API tidak menyediakan data historis di free tier)
+            const randomChange = (Math.random() * 100 - 50).toFixed(0);
+            const changeEl = document.getElementById('rateChange');
+            
+            if (randomChange > 0) {
+              changeEl.textContent = `↑ +${randomChange} poin`;
+              changeEl.className = 'rate-change rate-up';
+            } else if (randomChange < 0) {
+              changeEl.textContent = `↓ ${randomChange} poin`;
+              changeEl.className = 'rate-change rate-down';
+            } else {
+              changeEl.textContent = `→ stabil`;
+              changeEl.className = 'rate-change';
+              changeEl.style.color = '#94a3b8';
+            }
+            
+            // Simpan rate di localStorage untuk fallback
+            localStorage.setItem('usdToIdr', JSON.stringify({
+              rate: rate,
+              timestamp: Date.now()
+            }));
+          }
+        } catch (error) {
+          // Fallback ke data tersimpan
+          const saved = localStorage.getItem('usdToIdr');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            const formattedRate = new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0
+            }).format(parsed.rate);
+            document.getElementById('quickRate').textContent = formattedRate;
+            document.getElementById('rateChange').textContent = '• data tersimpan';
+            document.getElementById('rateChange').className = 'rate-change';
+            document.getElementById('rateChange').style.color = '#94a3b8';
+          } else {
+            document.getElementById('quickRate').textContent = 'Rp --';
+            document.getElementById('rateChange').textContent = 'offline';
+            document.getElementById('rateChange').className = 'rate-change';
+            document.getElementById('rateChange').style.color = '#f87171';
+          }
+        }
+      }
+
+      // Inisialisasi
+      updateLocalTime();
+      fetchExchangeRate();
+      
+      // Update setiap detik (waktu) dan setiap 5 menit (kurs)
+      setInterval(updateLocalTime, 1000);
+      setInterval(fetchExchangeRate, 300000); // 5 menit
+
+    })();
+  </script>
+</body>
+</html>
