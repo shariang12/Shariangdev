@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>🚀 Shariang Dev • Jasa Google Console</title>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(ellipse at 50% 0%, #1e293b 0%, #0f172a 60%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Canvas efek hacker */
+    #hacker-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    /* Container utama */
+    .container {
+      max-width: 440px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 60px rgba(251, 191, 36, 0.08);
+      padding: 24px 20px 28px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* Bahasa selector */
+    .language-selector {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .payment-toggle {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 14px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fbbf24;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+
+    .payment-toggle:hover {
+      background: rgba(40, 50, 70, 0.9);
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+
+    .payment-toggle i {
+      font-size: 14px;
+    }
+
+    #langSelect {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 10px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #f1f5f9;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      width: fit-content;
+      max-width: 140px;
+      appearance: none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #langSelect:hover {
+      background: rgba(40, 50, 70, 0.9);
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+
+    /* Logo */
+    .logo {
+      text-align: center;
+      margin: 8px 0 12px;
+    }
+
+    #logo {
+      max-width: 130px;
+      max-height: 130px;
+      width: auto;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      object-fit: contain;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Nama usaha */
+    .business-name {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #fbbf24, #f97316, #ef4444);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .brand-badge {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .brand-badge span {
+      display: inline-block;
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fbbf24;
+      text-transform: uppercase;
+    }
+
+    /* Deskripsi */
+    .description h1 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 6px;
+      line-height: 1.3;
+      text-align: center;
+      word-break: break-word;
+      letter-spacing: -0.3px;
+    }
+
+    .description .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    /* Kategori Layanan */
+    .service-category {
+      margin-bottom: 16px;
+    }
+
+    .category-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #fbbf24;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-title i {
+      font-size: 15px;
+      background: rgba(251, 191, 36, 0.15);
+      padding: 6px;
+      border-radius: 10px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .description ul {
+      list-style: none;
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 22px;
+      padding: 16px;
+      margin-bottom: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .description li {
+      padding: 11px 0 11px 30px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>') left center no-repeat;
+      background-size: 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #e2e8f0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+      line-height: 1.4;
+    }
+
+    .description li:last-child {
+      border-bottom: none;
+    }
+
+    .description li small {
+      display: block;
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    /* Badge NEW */
+    .badge-new {
+      display: inline-block;
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 10px;
+      margin-left: 6px;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Modal / Popup Pembayaran */
+    .payment-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .payment-modal.active {
+      display: flex;
+    }
+
+    .payment-card {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 28px;
+      padding: 24px 20px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .payment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .payment-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .payment-header h3 i {
+      color: #fbbf24;
+    }
+
+    .close-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f1f5f9;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .close-btn:active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .payment-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .payment-tab {
+      flex: 1;
+      padding: 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(30, 41, 59, 0.5);
+      color: #94a3b8;
+      font-weight: 600;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .payment-tab.active {
+      background: rgba(251, 191, 36, 0.15);
+      border-color: rgba(251, 191, 36, 0.4);
+      color: #fbbf24;
+    }
+
+    .payment-tab i {
+      font-size: 16px;
+    }
+
+    .payment-detail {
+      background: rgba(30, 41, 59, 0.6);
+      border-radius: 20px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+    }
+
+    .payment-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.06);
+    }
+
+    .payment-row:last-child {
+      border-bottom: none;
+    }
+
+    .payment-label {
+      font-size: 12px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .payment-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f1f5f9;
+      letter-spacing: -0.2px;
+    }
+
+    .copy-btn-small {
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 10px;
+      padding: 5px 10px;
+      color: #fbbf24;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: 'Inter', sans-serif;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+    }
+
+    .copy-btn-small:active {
+      background: rgba(251, 191, 36, 0.3);
+    }
+
+    .payment-note {
+      font-size: 11px;
+      color: #64748b;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    /* Link */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      padding: 16px 20px;
+      border-radius: 60px;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.15s, box-shadow 0.2s;
+      border: 1px solid transparent;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.2px;
+    }
+
+    .links a:active {
+      transform: scale(0.97);
+    }
+
+    /* TikTok */
+    #tiktok-link {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #tiktok-link:hover {
+      background: rgba(20, 20, 20, 0.8);
+      border-color: rgba(255, 0, 128, 0.4);
+      box-shadow: 0 8px 25px rgba(255, 0, 128, 0.2);
+    }
+
+    /* WhatsApp */
+    #wa-link {
+      background: rgba(37, 211, 102, 0.85);
+      backdrop-filter: blur(10px);
+      color: white;
+      box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      animation: pulse 1.8s infinite ease-in-out;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #wa-link:hover {
+      background: rgba(32, 189, 89, 0.95);
+      animation: none;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      }
+      50% {
+        transform: scale(1.04);
+        box-shadow: 0 14px 30px rgba(37, 211, 102, 0.55);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+      }
+    }
+
+    .links a i {
+      font-size: 22px;
+    }
+
+    /* RTL Support */
+    body[dir="rtl"] .description li {
+      padding: 11px 30px 11px 0;
+      background-position: right center;
+    }
+
+    body[dir="rtl"] .language-selector {
+      flex-direction: row-reverse;
+    }
+
+    /* Mobile */
+    @media (max-width: 380px) {
+      .container {
+        padding: 20px 16px;
+      }
+      .description h1 {
+        font-size: 20px;
+      }
+      .links a {
+        font-size: 14px;
+        padding: 14px 16px;
+      }
+      .business-name {
+        font-size: 20px;
+      }
+      .category-title {
+        font-size: 12px;
+      }
+      .payment-card {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas efek hacker -->
+  <canvas id="hacker-canvas"></canvas>
+
+  <!-- Modal Pembayaran -->
+  <div class="payment-modal" id="paymentModal">
+    <div class="payment-card">
+      <div class="payment-header">
+        <h3><i class="fas fa-wallet"></i> <span data-i18n="paymentTitle">Metode Pembayaran</span></h3>
+        <button class="close-btn" id="closePaymentBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Tab Pembayaran -->
+      <div class="payment-tabs">
+        <button class="payment-tab active" data-tab="international">
+          <i class="fab fa-bitcoin"></i> <span data-i18n="interTab">Internasional</span>
+        </button>
+        <button class="payment-tab" data-tab="domestic">
+          <i class="fas fa-landmark"></i> <span data-i18n="domTab">Indonesia</span>
+        </button>
+      </div>
+
+      <!-- Konten Internasional (Binance) -->
+      <div class="payment-content" id="internationalContent">
+        <div class="payment-detail">
+          <div class="payment-row">
+            <span class="payment-label"><i class="fab fa-bitcoin"></i> Platform</span>
+            <span class="payment-value">Binance</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label"><i class="fas fa-id-card"></i> Nama</span>
+            <span class="payment-value">Shariang Dev</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label"><i class="fas fa-hashtag"></i> ID</span>
+            <span class="payment-value">
+              483828402
+              <button class="copy-btn-small" onclick="copyText('483828402', this)">
+                <i class="far fa-copy"></i> Salin
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Konten Domestik (BNI) -->
+      <div class="payment-content" id="domesticContent" style="display: none;">
+        <div class="payment-detail">
+          <div class="payment-row">
+            <span class="payment-label"><i class="fas fa-landmark"></i> Bank</span>
+            <span class="payment-value">BNI</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label"><i class="fas fa-user"></i> Nama</span>
+            <span class="payment-value">Andreas Eko Darmawan</span>
+          </div>
+          <div class="payment-row">
+            <span class="payment-label"><i class="fas fa-credit-card"></i> No. Rekening</span>
+            <span class="payment-value">
+              1942943720
+              <button class="copy-btn-small" onclick="copyText('1942943720', this)">
+                <i class="far fa-copy"></i> Salin
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <p class="payment-note" data-i18n="paymentNote">Konfirmasi pembayaran via WhatsApp setelah transfer</p>
+    </div>
+  </div>
+
+  <!-- Container Utama -->
+  <div class="container">
+    <!-- Baris Atas: Pembayaran + Bahasa -->
+    <div class="language-selector">
+      <button class="payment-toggle" id="openPaymentBtn">
+        <i class="fas fa-wallet"></i> <span data-i18n="payBtn">Pembayaran</span>
+      </button>
+      <select id="langSelect" aria-label="Pilih bahasa / Choose language">
+        <option value="id" selected>🇮🇩 ID</option>
+        <option value="ru">🇷🇺 RU</option>
+        <option value="ar">🇸🇦 AR</option>
+        <option value="en">🇬🇧 EN</option>
+      </select>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgEqAgYMIVBhoUKlw8bFkY9EkyHSQCRF7vbfIUHXMwNtrVWYcASGZoix38xFBUsLwd9Uqndsdlhv2Do0e17E4IiwDhuXWKvvlppPgjSjnP89vBmbJU4A-n68MjZEsvOuFL9JxP8o-t2o1K9McGTon69sQCDxoS-O-d8YbeP_ecJAFFdiBjrGx1q7-2Vww/s512/1000309882.png" alt="Logo Shariang Dev" id="logo" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'150\' height=\'150\' viewBox=\'0 0 100 100\'%3E%3Crect width=\'100\' height=\'100\' fill=\'%231e293b\'/%3E%3Ctext x=\'50\' y=\'55\' font-size=\'12\' text-anchor=\'middle\' fill=\'%23fbbf24\' font-family=\'Arial\' font-weight=\'bold\'%3ESHARIANG%3C/text%3E%3C/svg%3E';">
+    </div>
+
+    <!-- Nama usaha -->
+    <div class="business-name">Shariang Dev</div>
+    <div class="brand-badge"><span>🚀 Google Console Expert</span></div>
+
+    <!-- Deskripsi -->
+    <div class="description">
+      <h1 data-i18n="title">Jasa Google Console</h1>
+      <div class="subtitle" data-i18n="subtitle">Solusi lengkap untuk kebutuhan Google Play Console Anda</div>
+
+      <!-- Kategori 1: Akun & Upload -->
+      <div class="service-category">
+        <div class="category-title">
+          <i class="fas fa-user-shield"></i> <span data-i18n="cat1">Akun & Upload</span>
+        </div>
+        <ul>
+          <li data-i18n="service1">Jasa pembuatan akun Google Console</li>
+          <li data-i18n="service2">Jual beli akun Google Console</li>
+          <li data-i18n="service3">Jasa upload aplikasi ke dalam akun Google Console</li>
+          <li data-i18n="service4">Jasa tester aplikasi</li>
+        </ul>
+      </div>
+
+      <!-- Kategori 2: Pembuatan Aplikasi -->
+      <div class="service-category">
+        <div class="category-title">
+          <i class="fas fa-code"></i> <span data-i18n="cat2">Pembuatan Aplikasi</span> <span class="badge-new">NEW</span>
+        </div>
+        <ul>
+          <li>
+            <span data-i18n="service5">Jasa pembuatan aplikasi Android</span>
+            <small data-i18n="service5desc">WebView, PWA, Native, atau sesuai kebutuhan</small>
+          </li>
+          <li>
+            <span data-i18n="service6">Jasa pembuatan aplikasi iOS</span>
+            <small data-i18n="service6desc">iPhone & iPad ready</small>
+          </li>
+          <li>
+            <span data-i18n="service7">Jasa redesign / perbaikan aplikasi</span>
+            <small data-i18n="service7desc">UI/UX, bug fixing, update versi</small>
+          </li>
+          <li>
+            <span data-i18n="service8">Jasa konsultasi & strategi aplikasi</span>
+            <small data-i18n="service8desc">Riset keyword, ASO, monetisasi</small>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Tautan -->
+    <div class="links">
+      <a href="https://www.tiktok.com/@ndre_shariang?_r=1&_t=ZS-943Qqi1XmmV" target="_blank" id="tiktok-link">
+        <i class="fab fa-tiktok"></i> <span data-i18n="tiktok">Akun TikTok</span>
+      </a>
+      <a href="https://wa.me/6283852330333?text=Halo%20saya%20tertarik%20dengan%20jasa%20Google%20Console%20dari%20Shariang%20Dev" target="_blank" id="wa-link">
+        <i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp">Kontak WhatsApp</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ================== EFEK HACKER CANVAS ==================
+      const canvas = document.getElementById('hacker-canvas');
+      const ctx = canvas.getContext('2d');
+
+      const primaryColor = '#fbbf24';
+      const secondaryColor = '#f97316';
+      const accentColor = '#4ade80';
+
+      let width, height;
+      let columns = [];
+      const fontSize = 14;
+
+      function initCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        const cols = Math.floor(width / fontSize) + 10;
+        columns = [];
+        for (let i = 0; i < cols; i++) {
+          columns[i] = Math.floor(Math.random() * height / fontSize);
+        }
+      }
+
+      const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃ!@#$%^&*()_+';
+
+      function draw() {
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.08)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.font = fontSize + 'px "Courier New", monospace';
+
+        for (let i = 0; i < columns.length; i++) {
+          const char = chars[Math.floor(Math.random() * chars.length)];
+          const x = i * fontSize;
+          const y = columns[i] * fontSize;
+
+          const rand = Math.random();
+          let color;
+          if (rand < 0.5) {
+            color = primaryColor;
+          } else if (rand < 0.8) {
+            color = secondaryColor;
+          } else {
+            color = accentColor;
+          }
+
+          ctx.fillStyle = color;
+          ctx.globalAlpha = 0.7 + Math.random() * 0.3;
+          ctx.fillText(char, x, y);
+          ctx.globalAlpha = 1;
+
+          if (y > height && Math.random() > 0.97) {
+            columns[i] = 0;
+          } else {
+            columns[i] = columns[i] + 1;
+          }
+        }
+      }
+
+      initCanvas();
+      setInterval(draw, 50);
+
+      window.addEventListener('resize', () => {
+        initCanvas();
+      });
+
+      // ================== MODAL PEMBAYARAN ==================
+      const paymentModal = document.getElementById('paymentModal');
+      const openPaymentBtn = document.getElementById('openPaymentBtn');
+      const closePaymentBtn = document.getElementById('closePaymentBtn');
+      const paymentTabs = document.querySelectorAll('.payment-tab');
+      const internationalContent = document.getElementById('internationalContent');
+      const domesticContent = document.getElementById('domesticContent');
+
+      openPaymentBtn.addEventListener('click', () => {
+        paymentModal.classList.add('active');
+      });
+
+      closePaymentBtn.addEventListener('click', () => {
+        paymentModal.classList.remove('active');
+      });
+
+      paymentModal.addEventListener('click', (e) => {
+        if (e.target === paymentModal) {
+          paymentModal.classList.remove('active');
+        }
+      });
+
+      paymentTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          paymentTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          const tabType = tab.getAttribute('data-tab');
+          if (tabType === 'international') {
+            internationalContent.style.display = 'block';
+            domesticContent.style.display = 'none';
+          } else {
+            internationalContent.style.display = 'none';
+            domesticContent.style.display = 'block';
+          }
+        });
+      });
+
+      // ================== FUNGSI SALIN ==================
+      window.copyText = function(text, btn) {
+        navigator.clipboard.writeText(text).then(() => {
+          const originalHTML = btn.innerHTML;
+          btn.innerHTML = '<i class="fas fa-check"></i> Tersalin!';
+          btn.style.background = 'rgba(34, 197, 94, 0.2)';
+          btn.style.color = '#4ade80';
+          btn.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+          setTimeout(() => {
+            btn.innerHTML = originalHTML;
+            btn.style.background = 'rgba(251, 191, 36, 0.15)';
+            btn.style.color = '#fbbf24';
+            btn.style.borderColor = 'rgba(251, 191, 36, 0.25)';
+          }, 1500);
+        }).catch(() => {
+          alert('Gagal menyalin teks');
+        });
+      };
+
+      // ================== TERJEMAHAN BAHASA ==================
+      const translations = {
+        id: {
+          payBtn: "Pembayaran",
+          paymentTitle: "Metode Pembayaran",
+          interTab: "Internasional",
+          domTab: "Indonesia",
+          paymentNote: "Konfirmasi pembayaran via WhatsApp setelah transfer",
+          title: "Jasa Google Console",
+          subtitle: "Solusi lengkap untuk kebutuhan Google Play Console Anda",
+          cat1: "Akun & Upload",
+          cat2: "Pembuatan Aplikasi",
+          service1: "Jasa pembuatan akun Google Console",
+          service2: "Jual beli akun Google Console",
+          service3: "Jasa upload aplikasi ke dalam akun Google Console",
+          service4: "Jasa tester aplikasi",
+          service5: "Jasa pembuatan aplikasi Android",
+          service5desc: "WebView, PWA, Native, atau sesuai kebutuhan",
+          service6: "Jasa pembuatan aplikasi iOS",
+          service6desc: "iPhone & iPad ready",
+          service7: "Jasa redesign / perbaikan aplikasi",
+          service7desc: "UI/UX, bug fixing, update versi",
+          service8: "Jasa konsultasi & strategi aplikasi",
+          service8desc: "Riset keyword, ASO, monetisasi",
+          tiktok: "Akun TikTok",
+          whatsapp: "Kontak WhatsApp"
+        },
+        ru: {
+          payBtn: "Оплата",
+          paymentTitle: "Способ оплаты",
+          interTab: "Международный",
+          domTab: "Индонезия",
+          paymentNote: "Подтвердите оплату через WhatsApp после перевода",
+          title: "Услуги Google Console",
+          subtitle: "Полное решение для вашего Google Play Console",
+          cat1: "Аккаунт и Загрузка",
+          cat2: "Создание Приложений",
+          service1: "Услуги по созданию аккаунта Google Console",
+          service2: "Покупка и продажа аккаунтов Google Console",
+          service3: "Услуги по загрузке приложений в аккаунт Google Console",
+          service4: "Услуги тестировщика приложений",
+          service5: "Услуги по созданию приложений для Android",
+          service5desc: "WebView, PWA, Native или по требованию",
+          service6: "Услуги по созданию приложений для iOS",
+          service6desc: "Готово для iPhone и iPad",
+          service7: "Услуги по редизайну / исправлению приложений",
+          service7desc: "UI/UX, исправление ошибок, обновление версий",
+          service8: "Услуги консультации и стратегии приложений",
+          service8desc: "Исследование ключевых слов, ASO, монетизация",
+          tiktok: "Аккаунт TikTok",
+          whatsapp: "Контакт WhatsApp"
+        },
+        ar: {
+          payBtn: "الدفع",
+          paymentTitle: "طريقة الدفع",
+          interTab: "دولي",
+          domTab: "إندونيسيا",
+          paymentNote: "تأكيد الدفع عبر واتساب بعد التحويل",
+          title: "خدمات جوجل كونسول",
+          subtitle: "حل كامل لاحتياجات Google Play Console الخاصة بك",
+          cat1: "الحساب والتحميل",
+          cat2: "إنشاء التطبيقات",
+          service1: "خدمة إنشاء حساب جوجل كونسول",
+          service2: "بيع وشراء حسابات جوجل كونسول",
+          service3: "خدمة تحميل التطبيقات إلى حساب جوجل كونسول",
+          service4: "خدمة اختبار التطبيقات",
+          service5: "خدمة إنشاء تطبيقات أندرويد",
+          service5desc: "WebView أو PWA أو Native أو حسب الطلب",
+          service6: "خدمة إنشاء تطبيقات iOS",
+          service6desc: "جاهز لـ iPhone و iPad",
+          service7: "خدمة إعادة تصميم / إصلاح التطبيقات",
+          service7desc: "UI/UX، إصلاح الأخطاء، تحديث الإصدارات",
+          service8: "خدمة استشارات واستراتيجية التطبيقات",
+          service8desc: "بحث الكلمات المفتاحية، ASO، تحقيق الدخل",
+          tiktok: "حساب تيك توك",
+          whatsapp: "اتصال واتساب"
+        },
+        en: {
+          payBtn: "Payment",
+          paymentTitle: "Payment Method",
+          interTab: "International",
+          domTab: "Indonesia",
+          paymentNote: "Confirm payment via WhatsApp after transfer",
+          title: "Google Console Services",
+          subtitle: "Complete solution for your Google Play Console needs",
+          cat1: "Account & Upload",
+          cat2: "App Development",
+          service1: "Google Console account creation service",
+          service2: "Buy and sell Google Console accounts",
+          service3: "App upload service to Google Console account",
+          service4: "App tester service",
+          service5: "Android app development service",
+          service5desc: "WebView, PWA, Native, or custom requirements",
+          service6: "iOS app development service",
+          service6desc: "iPhone & iPad ready",
+          service7: "App redesign / repair service",
+          service7desc: "UI/UX, bug fixing, version updates",
+          service8: "App consultation & strategy service",
+          service8desc: "Keyword research, ASO, monetization",
+          tiktok: "TikTok Account",
+          whatsapp: "WhatsApp Contact"
+        }
+      };
+
+      const i18nElements = document.querySelectorAll('[data-i18n]');
+      const langSelect = document.getElementById('langSelect');
+      const body = document.body;
+
+      function changeLanguage(lang) {
+        if (!translations[lang]) return;
+
+        const texts = translations[lang];
+
+        i18nElements.forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (texts[key]) {
+            el.innerText = texts[key];
+          }
+        });
+
+        if (lang === 'ar') {
+          body.setAttribute('dir', 'rtl');
+        } else {
+          body.setAttribute('dir', 'ltr');
+        }
+
+        localStorage.setItem('preferredLang', lang);
+      }
+
+      langSelect.addEventListener('change', (e) => {
+        changeLanguage(e.target.value);
+      });
+
+      const savedLang = localStorage.getItem('preferredLang');
+      const defaultLang = savedLang && translations[savedLang] ? savedLang : 'id';
+      langSelect.value = defaultLang;
+      changeLanguage(defaultLang);
+    })();
+  </script>
+</body>
+</html>
