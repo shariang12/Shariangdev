@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>🌍 TimeSphere • Jam Dunia Modern</title>
+
+  <!-- Font modern & ikon -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at 20% 10%, #1e293b, #0f172a 80%);
+      min-height: 100vh;
+      padding: 16px 16px 30px;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    /* Container utama - maksimal lebar pas untuk HP */
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header elegan */
+    .header {
+      text-align: left;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      background: rgba(96, 165, 250, 0.2);
+      backdrop-filter: blur(12px);
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(to right, #ffffff, #bae6fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .profile-badge {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #cbd5e1;
+    }
+
+    /* Kartu waktu lokal - glassmorphism gelap */
+    .local-card {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 32px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: transform 0.2s;
+    }
+
+    .local-label {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .local-time {
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #e0f2fe;
+      text-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .local-date {
+      font-size: 16px;
+      font-weight: 500;
+      color: #b9c7dd;
+      background: rgba(255,255,255,0.05);
+      padding: 8px 16px;
+      border-radius: 30px;
+      display: inline-block;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Statistik ringkas */
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .stat {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(20px);
+      padding: 16px 8px;
+      border-radius: 24px;
+      flex: 1;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    }
+
+    .stat i {
+      font-size: 22px;
+      color: #60a5fa;
+      margin-bottom: 6px;
+    }
+
+    .stat h3 {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+
+    .stat p {
+      font-size: 12px;
+      color: #9ca3af;
+      font-weight: 500;
+    }
+
+    /* Search bar modern */
+    .search-wrapper {
+      position: relative;
+      margin: 8px 0 4px;
+    }
+
+    .search-wrapper input {
+      width: 100%;
+      padding: 16px 20px 16px 50px;
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      font-size: 16px;
+      color: #f8fafc;
+      outline: none;
+      transition: all 0.25s;
+      font-weight: 500;
+    }
+
+    .search-wrapper input::placeholder {
+      color: #94a3b8;
+      font-weight: 400;
+    }
+
+    .search-wrapper input:focus {
+      border-color: #60a5fa;
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 18px;
+    }
+
+    /* Grid kota - lebih compact & modern */
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .card {
+      background: rgba(30, 41, 59, 0.55);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+      background: rgba(40, 50, 70, 0.7);
+    }
+
+    .city-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .flag-circle {
+      font-size: 30px;
+      background: rgba(255,255,255,0.05);
+      width: 46px;
+      height: 46px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .city-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .city-name {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.2px;
+      color: #f1f5f9;
+    }
+
+    .city-date {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .time-gmt {
+      text-align: right;
+    }
+
+    .city-time {
+      font-size: 26px;
+      font-weight: 700;
+      color: #bae6fd;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      text-shadow: 0 0 8px rgba(56,189,248,0.3);
+    }
+
+    .gmt-badge {
+      background: rgba(96, 165, 250, 0.18);
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #93c5fd;
+      display: inline-block;
+      margin-top: 4px;
+      border: 1px solid rgba(96,165,250,0.25);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 12px;
+      color: #64748b;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    /* Scroll halus */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    /* Responsive fine-tune */
+    @media (max-width: 380px) {
+      .local-time {
+        font-size: 46px;
+      }
+      .city-time {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header modern -->
+    <div class="header">
+      <div>
+        <div class="logo-group">
+          <div class="logo-icon">🌍</div>
+          <div>
+            <div class="logo-text">TimeSphere</div>
+            <div class="subtitle">Jam Dunia Premium</div>
+          </div>
+        </div>
+      </div>
+      <div class="profile-badge">
+        <i class="fas fa-globe-asia"></i> 25 kota
+      </div>
+    </div>
+
+    <!-- Waktu lokal Anda -->
+    <div class="local-card">
+      <div class="local-label">
+        <i class="fas fa-map-pin"></i> Waktu Anda
+      </div>
+      <div class="local-time" id="localTime">--:--:--</div>
+      <div class="local-date" id="localDate">Memuat...</div>
+    </div>
+
+    <!-- Statistik singkat -->
+    <div class="stats">
+      <div class="stat">
+        <i class="fas fa-city"></i>
+        <h3>25</h3>
+        <p>Kota Global</p>
+      </div>
+      <div class="stat">
+        <i class="fas fa-sync-alt fa-spin" style="font-size: 18px; color: #60a5fa;"></i>
+        <h3>Live</h3>
+        <p>Real-time</p>
+      </div>
+      <div class="stat">
+        <i class="far fa-clock"></i>
+        <h3>24/7</h3>
+        <p>Update</p>
+      </div>
+    </div>
+
+    <!-- Pencarian -->
+    <div class="search-wrapper">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" id="searchInput" placeholder="Cari kota atau negara...">
+    </div>
+
+    <!-- Daftar kota -->
+    <div class="grid" id="cityGrid"></div>
+
+    <div class="footer">
+      <i class="far fa-dot-circle"></i> TimeSphere • Sinkronisasi akurat
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // Data kota dengan zona waktu
+      const cities = [
+        { flag: "🇮🇩", city: "Jakarta", zone: "Asia/Jakarta", gmt: "GMT+7" },
+        { flag: "🇸🇬", city: "Singapore", zone: "Asia/Singapore", gmt: "GMT+8" },
+        { flag: "🇲🇾", city: "Kuala Lumpur", zone: "Asia/Kuala_Lumpur", gmt: "GMT+8" },
+        { flag: "🇹🇭", city: "Bangkok", zone: "Asia/Bangkok", gmt: "GMT+7" },
+        { flag: "🇵🇭", city: "Manila", zone: "Asia/Manila", gmt: "GMT+8" },
+        { flag: "🇻🇳", city: "Hanoi", zone: "Asia/Ho_Chi_Minh", gmt: "GMT+7" },
+        { flag: "🇯🇵", city: "Tokyo", zone: "Asia/Tokyo", gmt: "GMT+9" },
+        { flag: "🇰🇷", city: "Seoul", zone: "Asia/Seoul", gmt: "GMT+9" },
+        { flag: "🇨🇳", city: "Beijing", zone: "Asia/Shanghai", gmt: "GMT+8" },
+        { flag: "🇮🇳", city: "Mumbai", zone: "Asia/Kolkata", gmt: "GMT+5:30" },
+        { flag: "🇦🇪", city: "Dubai", zone: "Asia/Dubai", gmt: "GMT+4" },
+        { flag: "🇷🇺", city: "Moscow", zone: "Europe/Moscow", gmt: "GMT+3" },
+        { flag: "🇩🇪", city: "Berlin", zone: "Europe/Berlin", gmt: "GMT+2" },
+        { flag: "🇫🇷", city: "Paris", zone: "Europe/Paris", gmt: "GMT+2" },
+        { flag: "🇬🇧", city: "London", zone: "Europe/London", gmt: "GMT+1" },
+        { flag: "🇺🇸", city: "New York", zone: "America/New_York", gmt: "GMT-4" },
+        { flag: "🇺🇸", city: "Chicago", zone: "America/Chicago", gmt: "GMT-5" },
+        { flag: "🇺🇸", city: "Los Angeles", zone: "America/Los_Angeles", gmt: "GMT-7" },
+        { flag: "🇨🇦", city: "Toronto", zone: "America/Toronto", gmt: "GMT-4" },
+        { flag: "🇧🇷", city: "Sao Paulo", zone: "America/Sao_Paulo", gmt: "GMT-3" },
+        { flag: "🇲🇽", city: "Mexico City", zone: "America/Mexico_City", gmt: "GMT-6" },
+        { flag: "🇪🇬", city: "Cairo", zone: "Africa/Cairo", gmt: "GMT+2" },
+        { flag: "🇿🇦", city: "Cape Town", zone: "Africa/Johannesburg", gmt: "GMT+2" },
+        { flag: "🇦🇺", city: "Sydney", zone: "Australia/Sydney", gmt: "GMT+10" },
+        { flag: "🇳🇿", city: "Auckland", zone: "Pacific/Auckland", gmt: "GMT+12" }
+      ];
+
+      const gridElement = document.getElementById('cityGrid');
+      const searchInput = document.getElementById('searchInput');
+      const localTimeEl = document.getElementById('localTime');
+      const localDateEl = document.getElementById('localDate');
+
+      // Fungsi format waktu berdasarkan zona
+      function getTimeInZone(zone) {
+        try {
+          return new Date().toLocaleTimeString('id-ID', {
+            timeZone: zone,
+            hour12: false,
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+        } catch (e) {
+          return '--:--:--';
+        }
+      }
+
+      function getDateInZone(zone) {
+        try {
+          return new Date().toLocaleDateString('id-ID', {
+            timeZone: zone,
+            weekday: 'short',
+            day: 'numeric',
+            month: 'short'
+          });
+        } catch (e) {
+          return '';
+        }
+      }
+
+      // Render kartu kota berdasarkan filter
+      function renderCities(filterText = '') {
+        const searchTerm = filterText.toLowerCase().trim();
+        const filtered = cities.filter(c => 
+          c.city.toLowerCase().includes(searchTerm) || 
+          c.gmt.toLowerCase().includes(searchTerm)
+        );
+
+        if (filtered.length === 0) {
+          gridElement.innerHTML = `<div style="text-align:center; padding:30px; color:#94a3b8; backdrop-filter:blur(10px); border-radius:24px; background:rgba(255,255,255,0.02);">🌐 Kota tidak ditemukan</div>`;
+          return;
+        }
+
+        gridElement.innerHTML = filtered.map(city => {
+          const timeStr = getTimeInZone(city.zone);
+          const dateStr = getDateInZone(city.zone);
+          return `
+            <div class="card">
+              <div class="city-info">
+                <div class="flag-circle">${city.flag}</div>
+                <div class="city-detail">
+                  <span class="city-name">${city.city}</span>
+                  <span class="city-date">${dateStr}</span>
+                </div>
+              </div>
+              <div class="time-gmt">
+                <div class="city-time">${timeStr}</div>
+                <span class="gmt-badge">${city.gmt}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Update waktu lokal dan grid
+      function updateAllTimes() {
+        const now = new Date();
+        
+        // Update lokal
+        localTimeEl.textContent = now.toLocaleTimeString('id-ID', { hour12: false });
+        localDateEl.textContent = now.toLocaleDateString('id-ID', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+
+        // Render ulang grid dengan filter saat ini
+        renderCities(searchInput.value);
+      }
+
+      // Event listener pencarian
+      searchInput.addEventListener('input', (e) => {
+        renderCities(e.target.value);
+      });
+
+      // Inisialisasi dan interval
+      updateAllTimes();
+      setInterval(updateAllTimes, 1000);
+
+      // Opsional: efek sentuhan halus pada kartu (sudah pakai :active)
+    })();
+  </script>
+</body>
+</html>
